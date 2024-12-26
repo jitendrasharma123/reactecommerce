@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Container, Row, Col, Button, Card } from 'react-bootstrap';
+import { Container,Navbar,Nav, Row, Col, Button, Card } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect, Suspense } from 'react';
 import Cart from '../src/components/cart';
@@ -48,30 +48,27 @@ function App() {
 
       <div className="App">
         <h1 style={{ color: "green" }}>Demo store</h1>
-        <Container>
-        <div className='cartquantity'>{totalQuantity}</div>
-          <img src='cart.png' style={{width:50,float:'right',cursor:'pointer'}} onClick={()=>getMiniCart()} />
-          {showMinicart ? <Cart /> :''}
           <center>
+            <Navbar expand="lg"
+                    bg="warning">
+                <Container>
+                    <Navbar.Brand href="/">
+                        Home
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav"></Navbar.Collapse>
             {categories.map((category) => {
               return (
                 <>
 
-                  <div
-                    style={{
-                      width: "15em",
-                      backgroundColor: "#35D841",
-                      padding: 2,
-                      borderRadius: 10,
-                      marginBlock: 10,
+                  
 
-
-
-                    }}
-                  >
-                    <p style={{ fontSize: 20, color: 'white', cursor: 'pointer' }} onClick={() => getCategoryProducts({ category })}>{category}</p>
-
-                  </div>
+                    
+                        <Nav className="me-auto">
+                            <Nav.Link onClick={() => getCategoryProducts({ category })}>{category}</Nav.Link>
+                            
+                            
+                        </Nav>
 
 
 
@@ -79,14 +76,20 @@ function App() {
 
               );
             })}
+           
+                </Container>
+            </Navbar>
           </center>
+          <div className='cartquantity'>{totalQuantity}</div>
+          <img src='cart.png' style={{width:50,float:'right',cursor:'pointer'}} onClick={()=>getMiniCart()} />
+          <div class="card" style={{width:200, float:'right'}}>{showMinicart ? <Cart /> :''}</div>
+          
+          <Container>
           <Suspense fallback={<div>Loading...</div>}>
             <Catspecproduct categoryproducts={categoryproducts} />
           </Suspense>
 
-          
-          
-        </Container>
+          </Container>
 
       </div> 
     </>
